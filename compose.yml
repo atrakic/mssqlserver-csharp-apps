@@ -1,0 +1,36 @@
+services:
+
+  # Bootrstrap with scripts
+  db:
+    build: ./db
+    pull_policy: missing
+    container_name: db
+    hostname: db
+    environment:
+      - MSSQL_SA_PASSWORD=Strong=Passw0rd
+      - ACCEPT_EULA=Y
+    ports:
+      - 1402:1433
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "Strong=Passw0rd" -Q "SELECT 1" -b
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+  
+  backup.db:
+    build: ./backup
+    restart: 'no' #unless-stopped
+    container_name: backup
+    hostname: backup
+    environment:
+      - MSSQL_SA_PASSWORD=Strong=Passw0rd
+      - ACCEPT_EULA=Y
+    ports:
+       - 1403:1433
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "Strong=Passw0rd" -Q "SELECT 1" -b
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
