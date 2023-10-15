@@ -1,7 +1,7 @@
 MAKEFLAGS += --silent
 
 DB ?= db
-MSSQL_SA_PASSWORD} ?=
+MSSQL_SA_PASSWORD ?=
 
 %:
 	DOCKER_BUILDKIT=1 docker-compose up --no-color --remove-orphans $@ -d

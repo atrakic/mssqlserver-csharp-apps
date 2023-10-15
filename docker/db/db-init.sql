@@ -1,8 +1,13 @@
 USE master;
 GO
-DROP DATABASE IF EXISTS bwdb;
+create user demo from external provider;
 GO
-CREATE DATABASE bwdb;
+alter role db_owner add member demo;
+GO
+DROP DATABASE IF EXISTS demo;
+GO
+CREATE DATABASE demo;
+PRINT 'Creating demo database ...';
 GO
 USE [bwdb]
 GO
