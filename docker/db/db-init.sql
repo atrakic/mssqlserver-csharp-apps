@@ -9,7 +9,7 @@ GO
 CREATE DATABASE demo;
 PRINT 'Creating demo database ...';
 GO
-USE [bwdb]
+USE [demo]
 GO
 PRINT 'Creating customers table...';
 GO
