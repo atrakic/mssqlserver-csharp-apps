@@ -2,18 +2,17 @@ services:
 
   app:
     build:
-      context: app
+      context: ./src
       args:
         - BUILDPLATFORM=linux/amd64 # linux/arm64/v8
         - TARGETARCH=x86
     container_name: app
     environment:
-      - DB_SERVER=db
-      - DB_USER=sa
-      - DB_PWD=${MSSQL_SA_PASSWORD}
+      - SQL_CONNECTION=Server=db;UID=sa;PWD=${MSSQL_SA_PASSWORD};trusted_connection=false;Persist Security Info=False;Encrypt=False;
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   ## 1) Bootstrap with scripts
   db:
@@ -35,8 +34,10 @@ services:
 
   ## 2) Restore db from backup
   backup:
-    build: ./docker/backup
-    #restart: 'no' #unless-stopped
+    build:
+      context: ./docker/backup
+      args:
+        - BACKUP=https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorksLT2022.bak
     container_name: backup
     hostname: backup
     environment:

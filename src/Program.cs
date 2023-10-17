@@ -11,9 +11,7 @@ namespace app
     {
         static void Main(string[] args)
         {
-            string server = Environment.GetEnvironmentVariable("DB_SERVER") ?? "localhost";
-            string user = Environment.GetEnvironmentVariable("DB_USER") ?? "sa";
-            string pwd = Environment.GetEnvironmentVariable("DB_PWD") ?? "P@ssw0rd!123";
+            string connection = Environment.GetEnvironmentVariable("SQL_CONNECTION") ?? "";
             string _sql =
                 Environment.GetEnvironmentVariable("DB_QUERY")
                 ?? @"
@@ -32,9 +30,7 @@ namespace app
                           (values(1)) t(c) for json auto, without_array_wrapper
                   ";
 
-            SqlConnection conn = new SqlConnection(
-                $"Server={server}; UID={user}; PWD={pwd}; trusted_connection=false;Persist Security Info=False;Encrypt=False"
-            );
+            SqlConnection conn = new SqlConnection(connection);
             conn.Open();
             Console.WriteLine(
                 $"Connected to SQL Server v{conn.ServerVersion} from {Environment.OSVersion.VersionString}"
