@@ -23,6 +23,8 @@ services:
     environment:
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
       - ACCEPT_EULA=Y
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     ports:
       - 1433:1433
     healthcheck:
@@ -43,11 +45,32 @@ services:
     environment:
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
       - ACCEPT_EULA=Y
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     ports:
-       - 1403:1433
+       - 1432:1433
     healthcheck:
       test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "${MSSQL_SA_PASSWORD}" -Q "SELECT 1" -b
       interval: 10s
       timeout: 3s
       retries: 10
       start_period: 10s
+
+  # curl -H "Authorization: Bearer ${WATCHTOWER_HTTP_API_TOKEN}" localhost:8080/v1/update
+  watchtower:
+      image: containrrr/watchtower
+      container_name: watchtower
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      command: --debug --http-api-update
+      environment:
+        - WATCHTOWER_HTTP_API_METRICS=true
+        - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_HTTP_API_TOKEN}
+      #- WATCHTOWER_ROLLING_RESTART=true
+      #- WATCHTOWER_NOTIFICATIONS=msteams
+      #- WATCHTOWER_NOTIFICATION_MSTEAMS_USE_LOG_DATA=true
+      #- WATCHTOWER_NOTIFICATION_MSTEAMS_HOOK_URL="https://outlook.office.com/webhook/xxxxxxxx@xxxxxxx/IncomingWebhook/yyyyyyyy/zzzzzzzzzz" \
+      labels:
+        - "com.centurylinklabs.watchtower.enable=false"
+      ports:
+        - 8080:8080
