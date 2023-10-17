@@ -6,7 +6,7 @@ ARG BASE_IMAGE_RUNTIME=dotnet/runtime
 
 FROM ${BASE_IMAGE_REPO}/${BASE_IMAGE_BUILD}:${BASE_IMAGE_TAG} as base
 WORKDIR /app
-ARG PROJNAME="dotnetapp.csproj"
+ARG PROJNAME="app.csproj"
 
 FROM base AS build-env
 WORKDIR /src
@@ -23,4 +23,4 @@ WORKDIR /app
 RUN apk add --no-cache icu-libs
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "dotnetapp.dll"]
+ENTRYPOINT ["dotnet", "app.dll"]

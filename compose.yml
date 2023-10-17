@@ -1,11 +1,31 @@
 services:
 
+  api:
+    build:
+      context: ./src/api
+    container_name: api
+    environment:
+      - SQL_CONNECTION=Server=db;UID=sa;PWD=${MSSQL_SA_PASSWORD};trusted_connection=false;Persist Security Info=False;Encrypt=False;
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 8000:80
+    volumes:
+      - ./healthchecks:/healthchecks
+    healthcheck:
+      test: /healthchecks/curl.sh
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    depends_on:
+      db:
+        condition: service_healthy
+      app:
+        condition: service_completed_successfully
+
   app:
     build:
-      context: ./src
-      args:
-        - BUILDPLATFORM=linux/amd64 # linux/arm64/v8
-        - TARGETARCH=x86
+      context: ./src/app
     container_name: app
     environment:
       - SQL_CONNECTION=Server=db;UID=sa;PWD=${MSSQL_SA_PASSWORD};trusted_connection=false;Persist Security Info=False;Encrypt=False;
@@ -45,8 +65,6 @@ services:
     environment:
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
       - ACCEPT_EULA=Y
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
     ports:
        - 1432:1433
     healthcheck:
@@ -55,22 +73,3 @@ services:
       timeout: 3s
       retries: 10
       start_period: 10s
-
-  # curl -H "Authorization: Bearer ${WATCHTOWER_HTTP_API_TOKEN}" localhost:8080/v1/update
-  watchtower:
-      image: containrrr/watchtower
-      container_name: watchtower
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-      command: --debug --http-api-update
-      environment:
-        - WATCHTOWER_HTTP_API_METRICS=true
-        - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_HTTP_API_TOKEN}
-      #- WATCHTOWER_ROLLING_RESTART=true
-      #- WATCHTOWER_NOTIFICATIONS=msteams
-      #- WATCHTOWER_NOTIFICATION_MSTEAMS_USE_LOG_DATA=true
-      #- WATCHTOWER_NOTIFICATION_MSTEAMS_HOOK_URL="https://outlook.office.com/webhook/xxxxxxxx@xxxxxxx/IncomingWebhook/yyyyyyyy/zzzzzzzzzz" \
-      labels:
-        - "com.centurylinklabs.watchtower.enable=false"
-      ports:
-        - 8080:8080

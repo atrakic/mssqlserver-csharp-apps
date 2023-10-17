@@ -1,11 +1,13 @@
 MAKEFLAGS += --silent
 
+BASEDIR=$(shell git rev-parse --show-toplevel)
+
 DB ?= db
 
-.PHONY: all test healthcheck clean
+.PHONY: all test sqlcmd healthcheck release clean
 
 all: clean
-	$(MAKE) app
+	$(MAKE) $(DB)
 
 %:
 	DOCKER_BUILDKIT=1 docker-compose up --build --force-recreate --no-color --remove-orphans $@ -d
@@ -18,7 +20,10 @@ test:
 		echo "waiting $(DB) ..."; \
 		sleep 1; \
 		done
-	./tests/test.sh $(DB) $(MSSQL_SA_PASSWORD)
+	${BASEDIR}/tests/test.sh $(DB) $(MSSQL_SA_PASSWORD)
+
+sqlcmd:
+	${BASEDIR}/tests/sqlcmd.sh $(DB) $(MSSQL_SA_PASSWORD)
 
 healthcheck:
 	docker inspect $(DB) --format "{{ (index (.State.Health.Log) 0).Output }}"
@@ -38,4 +43,4 @@ release: ## Release (eg. V=0.0.1)
 				https://api.github.com/repos/atrakic/$(shell basename $$PWD)/releases \
 				-d "{\"tag_name\":\"$(V)\",\"generate_release_notes\":true}"
 
--include .env
+-include .env dotnet.mk
