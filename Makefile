@@ -7,23 +7,23 @@ DB ?= db
 .PHONY: all test sqlcmd healthcheck release clean
 
 all: clean
-	$(MAKE) $(DB)
-
-%:
-	DOCKER_BUILDKIT=1 docker-compose up --build --force-recreate --no-color --remove-orphans $@ -d
+	DOCKER_BUILDKIT=1 docker-compose -f compose.yml -f compose.api.yml up --no-color --remove-orphans -d
 	docker-compose ps -a
 
-test:
+%:
+	DOCKER_BUILDKIT=1 docker-compose -f compose.yml -f compose.api.yml up --build --force-recreate --no-color --remove-orphans $@ -d
+
+test: db
 	while ! \
 		[[ "$$(docker inspect --format "{{json .State.Health }}" $(DB) | jq -r ".Status")" == "healthy" ]];\
 		do \
 		echo "waiting $(DB) ..."; \
 		sleep 1; \
 		done
-	${BASEDIR}/tests/test.sh $(DB) $(MSSQL_SA_PASSWORD)
+	${BASEDIR}/tests/test.sh $(DB) $(MSSQL_SA_PASSWORD) "SELECT @@VERSION"
 
 sqlcmd:
-	${BASEDIR}/tests/sqlcmd.sh $(DB) $(MSSQL_SA_PASSWORD)
+	${BASEDIR}/tests/test.sh $(DB) $(MSSQL_SA_PASSWORD)
 
 healthcheck:
 	docker inspect $(DB) --format "{{ (index (.State.Health.Log) 0).Output }}"

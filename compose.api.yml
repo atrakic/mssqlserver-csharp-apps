@@ -17,6 +17,8 @@ services:
       timeout: 3s
       retries: 10
       start_period: 10s
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     depends_on:
       db:
         condition: service_healthy

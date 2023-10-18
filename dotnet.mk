@@ -6,7 +6,9 @@ dotnet:
 	dotnet test --no-build --verbosity normal
 
 dotnet-app:
-	dotnet run --project ${BASEDIR}/src/app/app.csproj
+	SQL_CONNECTION='Server=localhost;UID=sa;PWD=${MSSQL_SA_PASSWORD};trusted_connection=false;Persist Security Info=False;Encrypt=False;' \
+								 dotnet run --project ${BASEDIR}/src/app/app.csproj
 
 dotnet-api:
-	dotnet run --project ${BASEDIR}/src/api/api.csproj
+	SQL_CONNECTION='Server=localhost;UID=sa;PWD=${MSSQL_SA_PASSWORD};trusted_connection=false;Persist Security Info=False;Encrypt=False;' \
+								 dotnet run --project ${BASEDIR}/src/api/api.csproj
