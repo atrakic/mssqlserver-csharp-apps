@@ -1,4 +1,4 @@
-MAKEFLAGS += --silent
+#MAKEFLAGS += --silent
 
 BASEDIR=$(shell git rev-parse --show-toplevel)
 
@@ -22,8 +22,9 @@ test:
 		done
 	${BASEDIR}/tests/test.sh $(DB) $(MSSQL_SA_PASSWORD) "SELECT @@VERSION"
 
+# QUERY="SELECT name FROM sys.databases" make sqlcmd
 sqlcmd:
-	${BASEDIR}/tests/test.sh $(DB) $(MSSQL_SA_PASSWORD)
+	${BASEDIR}/tests/test.sh $(DB) $(MSSQL_SA_PASSWORD) $(QUERY)
 
 healthcheck:
 	docker inspect $(DB) --format "{{ (index (.State.Health.Log) 0).Output }}"
