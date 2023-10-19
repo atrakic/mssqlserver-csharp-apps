@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "src\api\api.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app", "src\app\app.csproj", "{E4171AEF-FBA0-4A0F-8E92-46420E3C732D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skaffold", "src\skaffold\skaffold.csproj", "{466DF623-ABE7-4AC6-BFBE-045E1CACCCB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +28,14 @@ Global
 		{E4171AEF-FBA0-4A0F-8E92-46420E3C732D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4171AEF-FBA0-4A0F-8E92-46420E3C732D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4171AEF-FBA0-4A0F-8E92-46420E3C732D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{466DF623-ABE7-4AC6-BFBE-045E1CACCCB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{466DF623-ABE7-4AC6-BFBE-045E1CACCCB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{466DF623-ABE7-4AC6-BFBE-045E1CACCCB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{466DF623-ABE7-4AC6-BFBE-045E1CACCCB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{73F9D3D9-DC6E-4C8D-860E-42B3C7215B32} = {F066634D-D8EE-4FF0-9A12-8BB159BE0378}
 		{E4171AEF-FBA0-4A0F-8E92-46420E3C732D} = {F066634D-D8EE-4FF0-9A12-8BB159BE0378}
+		{466DF623-ABE7-4AC6-BFBE-045E1CACCCB5} = {F066634D-D8EE-4FF0-9A12-8BB159BE0378}
 	EndGlobalSection
 EndGlobal
