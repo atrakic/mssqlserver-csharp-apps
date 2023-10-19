@@ -34,12 +34,16 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 //app.UseAuthorization();
-//app.MapControllers();
+
+app.MapControllers();
 
 app.MapHealthChecks("/healthz", new HealthCheckOptions
 {
     AllowCachingResponses = false
 });
+
+app.MapGet("/", async (TodoDb db) =>
+    await db.Todos.ToListAsync());
 
 app.MapGet("/todoitems", async (TodoDb db) =>
     await db.Todos.ToListAsync());

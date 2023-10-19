@@ -13,7 +13,7 @@ all: clean
 %:
 	DOCKER_BUILDKIT=1 docker-compose -f compose.yml -f compose.api.yml up --build --force-recreate --no-color --remove-orphans $@ -d
 
-test: db
+test:
 	while ! \
 		[[ "$$(docker inspect --format "{{json .State.Health }}" $(DB) | jq -r ".Status")" == "healthy" ]];\
 		do \
