@@ -11,7 +11,9 @@ namespace app
     {
         static void Main(string[] args)
         {
-            string connection = Environment.GetEnvironmentVariable("SQL_CONNECTION") ?? "";
+            string connection = Environment.GetEnvironmentVariable("SQL_CONNECTION")
+                        ?? throw new ArgumentException("Missing SQL_CONNECTION env variable");
+
             string _sql =
                 Environment.GetEnvironmentVariable("DB_QUERY")
                 ?? @"
