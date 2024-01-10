@@ -6,15 +6,15 @@ MAKEFLAGS += --silent
 
 all:  ## Run all commands and demonstrate migration flow
 	$(eval count :=$(shell dotnet ef migrations list  --no-color --no-build --json | jq 'length'))
-	if [[ $(count) -eq 0 ]];then dotnet ef migrations add InitialCreate; fi
-	# Simulate new migration point:
-	$(eval count :=$(shell echo $$(($(count)+1))))
-	dotnet ef migrations add Demo_$(count)
+	if [[ $(count) -eq 0 ]];then\
+		dotnet ef migrations add InitialCreate; \
+	else \
+		$(eval count :=$(shell echo $$(($(count)+1)))) \
+		dotnet ef migrations add Demo_$(count); \
+	fi
 	dotnet run
-
-apply: ## Apply the last migration
-	git add -A .
-	git commit -m "chore: using latest migration $(lastMigration)"
+	git add ./Migrations
+	git commit -m "chore(migrations): applied $(lastMigration)"
 
 last: ## Get the last migration
 	dotnet ef migrations script --idempotent
