@@ -23,6 +23,14 @@ namespace EfCoreConsole.Context
                 options => options.EnableRetryOnFailure());
         }
 
-        public DbSet<Movie> Movies { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Foo>()
+                .ToTable("Foo", t => t.ExcludeFromMigrations());
+        }
+
+        //public DbSet<Sample> Sample { get; set; }
+
+        public DbSet<Foo> Foo { get; set; }
     }
 }
