@@ -8,11 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 using EfCoreConsole.Context;
 using EfCoreConsole.Models;
 
+using Microsoft.EntityFrameworkCore.SqlServer;
+
 namespace EfCoreConsole
 {
     class Program : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
-
         // EF Core uses this method at design time to access the DbContext
         public ApplicationDbContext CreateDbContext(string[] args)
         {
@@ -32,24 +33,24 @@ namespace EfCoreConsole
 
             using (ApplicationDbContext context = p.CreateDbContext(args))
             {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-                context.Database.Migrate();
-
-                context.Add(new Movie
+                if (context.Database.GetPendingMigrations().Any())
                 {
-                    Name = "Oppenheimer",
-                    Description = "A dramatization of the life story of J. Robert Oppenheimer, the physicist who had a large hand in the development of the atomic bomb, thus helping end World War 2. We see his life from university days all the way to post-WW2, where his fame saw him embroiled in political machinations.",
-                    ReleaseYear = 2023,
-                    RuntimeMinutes = 180
-                });
-                context.SaveChanges();
-
-                int movieCount = 0;
-                foreach (Movie movie in context.Movies)
+                    Console.WriteLine("Pending migrations:");
+                    foreach (var item in context.Database.GetPendingMigrations())
+                    {
+                        Console.WriteLine($"Migrating {item} ...");
+                        context.Database.Migrate();
+                    }
+                }
+                else
                 {
-                    movieCount++;
-                    Console.WriteLine($"{movieCount}: {movie.Name} ({movie.ReleaseYear})");
+                    Console.WriteLine("No pending migrations.");
+                }
+
+                Console.WriteLine("Applied migrations:");
+                foreach (var item in context.Database.GetAppliedMigrations())
+                {
+                    Console.WriteLine(item);
                 }
             }
         }
