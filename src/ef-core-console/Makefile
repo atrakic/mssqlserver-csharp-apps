@@ -6,9 +6,11 @@ HERE=$(shell pwd -P)
 
 .PHONY: all apply bundle last undo list clean help
 
-all: ## Run all commands and demonstrate migration flow
+all:  ## Run all commands and demonstrate migration flow
+	$(eval count :=$(shell dotnet ef migrations list  --no-color --no-build --json | jq 'length'))
 	if [[ $(count) -eq 0 ]];then dotnet ef migrations add InitialCreate; fi
-	count=$(shell echo $$(($(count)+1)))
+	# Simulate new migration point:
+	$(eval count :=$(shell echo $$(($(count)+1))))
 	dotnet ef migrations add Demo_$(count)
 	dotnet run
 
@@ -36,7 +38,6 @@ clean: ## Remove all migrations
 help:
 	cat $(MAKEFILE_LIST) | grep -e "^[a-zA-Z_\-]*: *.*## *" | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-count := $(shell dotnet ef migrations list  --no-color --no-build --json | jq 'length')
 lastMigration := $(shell dotnet ef migrations list | tail -n 1)"
 
 -include include.mk
