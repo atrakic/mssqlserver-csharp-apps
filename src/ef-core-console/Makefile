@@ -1,7 +1,5 @@
 MAKEFLAGS += --silent
 
-HERE=$(shell pwd -P)
-
 ##.DEFAULT_GOAL := help
 
 .PHONY: all apply bundle last undo list clean help
@@ -32,12 +30,13 @@ list: ## List all migrations
 
 clean: ## Remove all migrations
 	dotnet ef database update 0
-	dotnet ef migrations remove
-	rm -rf ${HERE}/Migrations/*.cs
+	dotnet ef migrations remove -f
+	rm -rf ${here}/Migrations/*.cs
 
 help:
 	cat $(MAKEFILE_LIST) | grep -e "^[a-zA-Z_\-]*: *.*## *" | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+here=$(shell pwd -P)
 lastMigration := $(shell dotnet ef migrations list | tail -n 1)"
 
 -include include.mk
