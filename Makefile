@@ -1,4 +1,4 @@
-#MAKEFLAGS += --silent
+MAKEFLAGS += --silent
 
 BASEDIR=$(shell git rev-parse --show-toplevel)
 
@@ -7,11 +7,11 @@ DB ?= db
 .PHONY: all test sqlcmd healthcheck release clean
 
 all: clean
-	DOCKER_BUILDKIT=1 docker-compose -f compose.yml -f compose.api.yml up --no-color --remove-orphans -d
-	docker-compose ps -a
+	DOCKER_BUILDKIT=1 docker-compose up --no-color --remove-orphans -d
 
 %:
-	DOCKER_BUILDKIT=1 docker-compose -f compose.yml -f compose.api.yml up --build --force-recreate --no-color --remove-orphans $@ -d
+	DOCKER_BUILDKIT=1 docker-compose up --build --no-color --remove-orphans $@ -d
+	docker-compose ps -a
 
 test:
 	while ! \

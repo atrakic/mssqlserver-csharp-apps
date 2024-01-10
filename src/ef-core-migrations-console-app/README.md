@@ -4,4 +4,3 @@
 
 ## See more
 - [Apply migrations programaticly](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli#apply-migrations-at-runtime)
-
