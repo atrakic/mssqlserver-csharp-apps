@@ -1,6 +1,6 @@
-# mssqlserver-compose-demo
+# mssqlserver-csharp-demo-apps
 
-[![license](https://img.shields.io/github/license/atrakic/mssqlserver-compose-demo.svg)](https://github.com/atrakic/mssqlserver-compose-demo/blob/main/LICENSE)
-[![.NET](https://github.com/atrakic/mssqlserver-compose-demo/actions/workflows/dotnet.yml/badge.svg)](https://github.com/atrakic/mssqlserver-compose-demo/actions/workflows/dotnet.yml)
+[![license](https://img.shields.io/github/license/atrakic/mssqlserver-csharp-demo-apps.svg)](https://github.com/atrakic/mssqlserver-csharp-demo-apps/blob/main/LICENSE)
+[![.NET](https://github.com/atrakic/mssqlserver-csharp-demo-apps/actions/workflows/dotnet.yml/badge.svg)](https://github.com/atrakic/mssqlserver-csharp-demo-apps/actions/workflows/dotnet.yml)
 
-> Demo how to run custom MsSQL servers and .Net apps with docker-compose.
+> Demo .Net apps with docker-compose.
