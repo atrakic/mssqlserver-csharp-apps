@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app", "src\app\app.csproj", "{E4171AEF-FBA0-4A0F-8E92-46420E3C732D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skaffold", "src\skaffold\skaffold.csproj", "{466DF623-ABE7-4AC6-BFBE-045E1CACCCB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerExample", "src\efcore-worker\WorkerExample.csproj", "{5AD0BFD4-A7FB-41D6-B755-45217BAA645E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +34,15 @@ Global
 		{466DF623-ABE7-4AC6-BFBE-045E1CACCCB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{466DF623-ABE7-4AC6-BFBE-045E1CACCCB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{466DF623-ABE7-4AC6-BFBE-045E1CACCCB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD0BFD4-A7FB-41D6-B755-45217BAA645E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD0BFD4-A7FB-41D6-B755-45217BAA645E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD0BFD4-A7FB-41D6-B755-45217BAA645E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD0BFD4-A7FB-41D6-B755-45217BAA645E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{73F9D3D9-DC6E-4C8D-860E-42B3C7215B32} = {F066634D-D8EE-4FF0-9A12-8BB159BE0378}
 		{E4171AEF-FBA0-4A0F-8E92-46420E3C732D} = {F066634D-D8EE-4FF0-9A12-8BB159BE0378}
 		{466DF623-ABE7-4AC6-BFBE-045E1CACCCB5} = {F066634D-D8EE-4FF0-9A12-8BB159BE0378}
+		{5AD0BFD4-A7FB-41D6-B755-45217BAA645E} = {F066634D-D8EE-4FF0-9A12-8BB159BE0378}
 	EndGlobalSection
 EndGlobal
