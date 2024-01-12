@@ -37,7 +37,7 @@ public class Worker : BackgroundService
             {
                DisplayUserInformation(users);
             }
-	    
+
             await Task.Delay(1000, stoppingToken);
         }
     }

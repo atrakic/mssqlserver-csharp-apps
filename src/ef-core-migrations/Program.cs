@@ -17,13 +17,17 @@ namespace EfCoreConsole
         // EF Core uses this method at design time to access the DbContext
         public ApplicationDbContext CreateDbContext(string[] args)
         {
-            var configurationBuilder = new ConfigurationBuilder()
-               .SetBasePath(Directory.GetCurrentDirectory())
-               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            string connectionString = Environment.GetEnvironmentVariable("SQL_CONNECTION") ?? "";
 
-            IConfigurationRoot configuration = configurationBuilder.Build();
-            string connectionString = configuration.GetConnectionString("Default") ?? string.Empty;
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                var configurationBuilder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
+                IConfigurationRoot configuration = configurationBuilder.Build();
+                connectionString = configuration.GetConnectionString("Default") ?? string.Empty;
+            }
             return new ApplicationDbContext(connectionString);
         }
 
