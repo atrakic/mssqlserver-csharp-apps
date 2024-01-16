@@ -4,7 +4,6 @@ services:
       context: .
     container_name: app
     environment:
-      - SQL_CONNECTION=Server=db;UID=sa;PWD=${MSSQL_SA_PASSWORD};trusted_connection=false;Persist Security Info=False;Encrypt=False;
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8000
     ports:
