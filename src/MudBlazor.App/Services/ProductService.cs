@@ -1,58 +1,58 @@
-
-//namespace My.Data.Services;
-
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 using My.Models;
 using My.Data;
-public interface IProductService
+
+namespace My.Services
 {
-    Task<List<Product>> GetProductsAsync();
-    Task<Product> GetProductAsync(int id);
-    Task<Product> AddProductAsync(Product product);
-    Task<Product> UpdateProductAsync(Product product);
-    Task DeleteProductAsync(int id);
-}
-public class ProductService : IProductService
-{
-    private readonly ApplicationDbContext _context;
-
-    public ProductService(ApplicationDbContext context)
+    public interface IProductService
     {
-        _context = context;
+        Task<List<Product>> GetProductsAsync();
+        Task<Product> GetProductAsync(int id);
+        Task<Product> AddProductAsync(Product product);
+        Task<Product> UpdateProductAsync(Product product);
+        Task DeleteProductAsync(int id);
     }
 
-
-    public async Task<List<Product>> GetProductsAsync()
+    public class ProductService : IProductService
     {
-        return await _context.Products.ToListAsync();
-    }
+        private readonly ApplicationDbContext _context;
 
-    public async Task<Product> GetProductAsync(int id)
-    {
-        return await _context.Products.FindAsync(id);
-    }
+        public ProductService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-    public async Task<Product> AddProductAsync(Product product)
-    {
-        _context.Products.Add(product);
-        await _context.SaveChangesAsync();
-        return product;
-    }
+        public async Task<List<Product>> GetProductsAsync()
+        {
+            return await _context.Products.ToListAsync();
+        }
 
-    public async Task<Product> UpdateProductAsync(Product product)
-    {
-        _context.Entry(product).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
-        return product;
-    }
+        public async Task<Product> GetProductAsync(int id)
+        {
+            return await _context.Products.FindAsync(id) ?? throw new Exception("Product not found");
+        }
+        public async Task<Product> AddProductAsync(Product product)
+        {
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+            return product;
+        }
 
-    public async Task DeleteProductAsync(int id)
-    {
-        var product = await _context.Products.FindAsync(id);
-        _context.Products.Remove(product);
-        await _context.SaveChangesAsync();
+        public async Task<Product> UpdateProductAsync(Product product)
+        {
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return product;
+        }
+
+        public async Task DeleteProductAsync(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            _context.Products.Remove(product); 
+            await _context.SaveChangesAsync();
+        }
     }
 }

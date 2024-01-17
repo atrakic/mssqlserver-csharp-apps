@@ -1,3 +1,4 @@
+
 namespace My.Models;
 
 public class Customer

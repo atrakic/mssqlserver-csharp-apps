@@ -4,6 +4,8 @@ using MudBlazor.Services;
 
 using My.Data;
 using My.Models;
+using My.Services;
+
 using app.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,8 +26,10 @@ else
         options.UseSqlServer(builder.Configuration.GetConnectionString("Default")
         ?? throw new InvalidOperationException("Connection string not found.")));
 }
+
 builder.Services.AddHealthChecks();
 builder.Services.AddMudServices();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
@@ -33,6 +37,7 @@ using var scope = app.Services.CreateScope();
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ApplicationDbContext>();
+
     context.Database.Migrate();
     SeedData.Initialize(context);
 }

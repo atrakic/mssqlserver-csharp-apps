@@ -4,6 +4,7 @@ using My.Models;
 
 namespace My.Data;
 
+
 public class ApplicationDbContext : DbContext
 {
     private readonly string _connectionString = default!;
