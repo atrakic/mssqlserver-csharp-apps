@@ -11,7 +11,7 @@ namespace My.Models
             {
                 throw new System.ArgumentNullException(nameof(context));
             }
-            
+
             if (context.Customers.Any())
             {
                 return; // DB has been seeded
@@ -27,7 +27,6 @@ namespace My.Models
                     Email = "foo@bar.com"
                 }
             );
-            context.SaveChanges();
 
             context.Products.AddRange(
                 new Product
@@ -46,7 +45,6 @@ namespace My.Models
                     Price = 30.00m
                 }
             );
-            context.SaveChanges();
 
             context.Orders.AddRange(
                 new Order
@@ -55,7 +53,6 @@ namespace My.Models
                     OrderPlaced = System.DateTime.Now,
                 }
             );
-            context.SaveChanges();
 
             context.OrderDetails.AddRange(
                 new OrderDetail
@@ -77,7 +74,8 @@ namespace My.Models
                     Quantity = 3
                 }
             );
+
             context.SaveChanges();
         }
     }
-}    
+}

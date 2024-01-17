@@ -21,7 +21,7 @@ if (builder.Environment.IsDevelopment())
 else
 {
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("Default") 
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Default")
         ?? throw new InvalidOperationException("Connection string not found.")));
 }
 builder.Services.AddHealthChecks();
