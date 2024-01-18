@@ -2,13 +2,9 @@ namespace app.Services;
 
 public class SumService
 {
-    public int A { get; set; }
-    public int B { get; set; }
-
-    public int? Result { get; set; }
-
-    public void Sum()
+    public int CalculateSum(int A, int B)
     {
-        Result = A + B;
+        Console.WriteLine("calling: SumService.CalculateSum");
+        return A + B;
     }
 }
