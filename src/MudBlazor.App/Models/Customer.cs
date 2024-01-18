@@ -1,5 +1,5 @@
 
-namespace My.Models;
+namespace app.Models;
 
 public class Customer
 {

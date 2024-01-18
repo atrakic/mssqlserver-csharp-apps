@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-using My.Models;
-using My.Data;
+using app.Models;
+using app.Data;
 
-namespace My.Services
+namespace app.Services
 {
     public interface IProductService
     {
@@ -24,12 +24,10 @@ namespace My.Services
         {
             _context = context;
         }
-
         public async Task<List<Product>> GetProductsAsync()
         {
             return await _context.Products.ToListAsync();
         }
-
         public async Task<Product> GetProductAsync(int id)
         {
             return await _context.Products.FindAsync(id) ?? throw new Exception("Product not found");
@@ -40,14 +38,12 @@ namespace My.Services
             await _context.SaveChangesAsync();
             return product;
         }
-
         public async Task<Product> UpdateProductAsync(Product product)
         {
             _context.Entry(product).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return product;
         }
-
         public async Task DeleteProductAsync(int id)
         {
             var product = await _context.Products.FindAsync(id);

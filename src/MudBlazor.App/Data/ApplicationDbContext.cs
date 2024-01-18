@@ -1,11 +1,9 @@
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using app.Models;
 
-using My.Models;
-
-namespace My.Data;
-
+namespace app.Data;
 
 public class ApplicationDbContext : DbContext
 {

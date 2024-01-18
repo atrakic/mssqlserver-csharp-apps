@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 
-using My.Data;
+using app.Data;
 
-namespace My.Models;
+namespace app.Models;
 
 public static class SeedData
 {
