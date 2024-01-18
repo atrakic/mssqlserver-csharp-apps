@@ -31,7 +31,8 @@ builder.Services.AddHealthChecks();
 
 // Register our own injectables
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddSingleton<SumService>();
+builder.Services.AddScoped<SumService>();
+builder.Services.AddScoped<HelloService>();
 
 var app = builder.Build();
 
