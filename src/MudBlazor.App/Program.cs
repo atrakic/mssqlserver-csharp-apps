@@ -22,6 +22,7 @@ else
         options.UseSqlServer(builder.Configuration.GetConnectionString("Default")
         ?? throw new InvalidOperationException("Connection string not found.")));
 }
+Console.WriteLine("Using ConnectionString: " + builder.Configuration.GetConnectionString("Default"));
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
@@ -30,7 +31,7 @@ builder.Services.AddMudServices();
 builder.Services.AddHealthChecks();
 
 // Register our own injectables
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<SumService>();
 builder.Services.AddScoped<HelloService>();
 

@@ -19,6 +19,7 @@ public class ApplicationDbContext : DbContext
         _connectionString = connectionString;
     }
 
+
     /**
     protected override void OnConfiguring(DbContextOptions optionsBuilder)
     {
@@ -54,5 +55,4 @@ public class ApplicationDbContext : DbContext
         Debug.WriteLine($"{ContextId} context disposed async.");
         return base.DisposeAsync();
     }
-
 }
