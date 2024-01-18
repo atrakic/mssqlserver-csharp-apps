@@ -42,6 +42,7 @@ public class ApplicationDbContext : DbContext
         configurationBuilder.Conventions.Remove(typeof(ForeignKeyIndexConvention));
     }
 
+    /**
     // Dispose pattern.
     public override void Dispose()
     {
@@ -55,4 +56,5 @@ public class ApplicationDbContext : DbContext
         Debug.WriteLine($"{ContextId} context disposed async.");
         return base.DisposeAsync();
     }
+    */
 }
