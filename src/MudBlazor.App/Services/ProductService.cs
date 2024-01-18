@@ -51,7 +51,7 @@ namespace My.Services
         public async Task DeleteProductAsync(int id)
         {
             var product = await _context.Products.FindAsync(id);
-            _context.Products.Remove(product); 
+            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
         }
     }

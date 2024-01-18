@@ -14,7 +14,6 @@ public class Product
     [Column(TypeName = "decimal(6, 2)")]
     public decimal Price { get; set; }
 
-    
-    public ICollection<Order> Orders { get; set; } = null!;
-    public ICollection<OrderDetail> OrderDetails { get; set; } = null!;
+    public ICollection<Order> Orders { get; set; } = new List<Order>();
+    public ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 }

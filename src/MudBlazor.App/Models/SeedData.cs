@@ -55,6 +55,8 @@ public static class SeedData
             }
         );
 
+        // TODO: ensure FOREIGN KEY constraint https://docs.microsoft.com/en-us/ef/core/modeling/relationships#foreign-key-constraints
+        /*
         context.OrderDetails.AddRange(
             new OrderDetail
             {
@@ -75,6 +77,7 @@ public static class SeedData
                 Quantity = 3
             }
         );
+        */
 
         context.SaveChanges();
     }
