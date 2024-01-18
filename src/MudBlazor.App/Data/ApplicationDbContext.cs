@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
@@ -13,6 +14,7 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
+        Debug.WriteLine($"{ContextId} context created.");
     }
     public ApplicationDbContext(string connectionString)
     {
@@ -33,12 +35,26 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Product>().ToTable(b => b.IsMemoryOptimized());        
+        modelBuilder.Entity<Product>().ToTable(b => b.IsMemoryOptimized());
     }
-
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         configurationBuilder.Conventions.Remove(typeof(ForeignKeyIndexConvention));
     }
+
+    // Dispose pattern.
+    public override void Dispose()
+    {
+        Debug.WriteLine($"{ContextId} context disposed.");
+        base.Dispose();
+    }
+
+    // Dispose pattern.
+    public override ValueTask DisposeAsync()
+    {
+        Debug.WriteLine($"{ContextId} context disposed async.");
+        return base.DisposeAsync();
+    }
+
 }
