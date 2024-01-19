@@ -3,8 +3,10 @@
 **/obj/
 **/out/
 
+
 # files
 **/*.yml
+**/*.db
 Makefile*
 Dockerfile*
 **/*.md

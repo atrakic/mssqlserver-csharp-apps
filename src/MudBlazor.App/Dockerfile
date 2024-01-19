@@ -1,26 +1,18 @@
-# Learn about building .NET container images:
-# https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
-ARG TARGETARCH
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /source
 
 # copy csproj and restore as distinct layers
-COPY *.csproj .
-RUN dotnet restore # -a $TARGETARCH
+COPY src/*.csproj .
+RUN dotnet restore
 
 # copy and publish app and libraries
-COPY . ./
-#RUN dotnet publish --no-restore -a $TARGETARCH -o /app
+COPY src/. .
 RUN dotnet publish --no-restore -o /app
 
 
-# Enable globalization and time zones:
-# https://github.com/dotnet/dotnet-docker/blob/main/samples/enable-globalization.md
-# final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 as final
 EXPOSE 8080
 WORKDIR /app
 COPY --from=build /app .
-# Uncomment to enable non-root user
-# USER $APP_UID
+USER $APP_UID
 ENTRYPOINT ["./app"]

@@ -34,12 +34,12 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Product>().ToTable(b => b.IsMemoryOptimized());
+        //modelBuilder.Entity<Product>().ToTable(b => b.IsMemoryOptimized());
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
-        configurationBuilder.Conventions.Remove(typeof(ForeignKeyIndexConvention));
+        //configurationBuilder.Conventions.Remove(typeof(ForeignKeyIndexConvention));
     }
 
     /**

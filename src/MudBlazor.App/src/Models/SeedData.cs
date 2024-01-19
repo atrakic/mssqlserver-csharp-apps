@@ -23,58 +23,41 @@ public static class SeedData
         context.Customers.AddRange(
             new Customer
             {
+                Id = 1,
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "foo@bar.com"
             }
         );
+        context.SaveChanges();
 
         context.Products.AddRange(
             new Product
             {
+                Id = 1,
                 Name = "Product 1",
                 Price = 10.00m
             },
             new Product
             {
+                Id = 2,
                 Name = "Product 2",
                 Price = 20.00m
             },
             new Product
             {
+                Id = 3,
                 Name = "Product 3",
                 Price = 30.00m
             }
         );
 
+        /**
         context.Orders.AddRange(
             new Order
             {
                 CustomerId = 1,
-                OrderPlaced = System.DateTime.Now,
-            }
-        );
-
-        // TODO: ensure FOREIGN KEY constraint https://docs.microsoft.com/en-us/ef/core/modeling/relationships#foreign-key-constraints
-        /*
-        context.OrderDetails.AddRange(
-            new OrderDetail
-            {
-                OrderId = 1,
-                ProductId = 1,
-                Quantity = 1
-            },
-            new OrderDetail
-            {
-                OrderId = 1,
-                ProductId = 2,
-                Quantity = 2
-            },
-            new OrderDetail
-            {
-                OrderId = 1,
-                ProductId = 3,
-                Quantity = 3
+                OrderPlaced = DateTime.UtcNow, // (0x80131904): Operand type clash: datetime2 is incompatible with text
             }
         );
         */
