@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app", "src\app\app.csproj", "{1B562FA4-2F11-45F6-8371-F50137B66569}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skaffold", "src\skaffold\skaffold.csproj", "{DCBD557B-7677-47B5-88F1-7237D98EA2D3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunction", "src\AzureFunction\AzureFunction.csproj", "{C6473EA9-156C-4275-88C8-07BFCC3811D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,15 +32,10 @@ Global
 		{DCBD557B-7677-47B5-88F1-7237D98EA2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCBD557B-7677-47B5-88F1-7237D98EA2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCBD557B-7677-47B5-88F1-7237D98EA2D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C6473EA9-156C-4275-88C8-07BFCC3811D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C6473EA9-156C-4275-88C8-07BFCC3811D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C6473EA9-156C-4275-88C8-07BFCC3811D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6473EA9-156C-4275-88C8-07BFCC3811D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{417D8722-8AC6-47F1-BD4C-69EFA3CE5F31} = {503D53EE-3E33-4011-B64B-8DB578DB4960}
 		{1B562FA4-2F11-45F6-8371-F50137B66569} = {503D53EE-3E33-4011-B64B-8DB578DB4960}
 		{DCBD557B-7677-47B5-88F1-7237D98EA2D3} = {503D53EE-3E33-4011-B64B-8DB578DB4960}
-		{C6473EA9-156C-4275-88C8-07BFCC3811D8} = {503D53EE-3E33-4011-B64B-8DB578DB4960}
 	EndGlobalSection
 EndGlobal
